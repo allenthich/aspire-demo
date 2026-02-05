@@ -1,0 +1,49 @@
+{
+  "name": "aspire-demo",
+  "private": true,
+  "workspaces": {
+    "packages": [
+      "apps/*",
+      "packages/*"
+    ],
+    "catalog": {
+      "dotenv": "^17.2.2",
+      "zod": "^4.1.13",
+      "typescript": "^5",
+      "@types/bun": "^1.3.4",
+      "hono": "^4.8.2",
+      "@orpc/server": "^1.12.2",
+      "@orpc/openapi": "^1.12.2",
+      "@orpc/zod": "^1.12.2",
+      "@orpc/client": "^1.12.2"
+    }
+  },
+  "type": "module",
+  "scripts": {
+    "dev": "turbo dev",
+    "build": "turbo build",
+    "check-types": "turbo check-types",
+    "dev:native": "turbo -F native dev",
+    "dev:web": "turbo -F web dev",
+    "dev:server": "turbo -F server dev",
+    "db:push": "turbo -F @aspire-demo/db db:push",
+    "db:studio": "turbo -F @aspire-demo/db db:studio",
+    "db:generate": "turbo -F @aspire-demo/db db:generate",
+    "db:migrate": "turbo -F @aspire-demo/db db:migrate",
+    "check": "biome check --write ."
+  },
+  "dependencies": {
+    "@aspire-demo/env": "workspace:*",
+    "dotenv": "catalog:",
+    "zod": "catalog:"
+  },
+  "devDependencies": {
+    "@aspire-demo/config": "workspace:*",
+    "@biomejs/biome": "^2.2.0",
+    "@types/bun": "catalog:",
+    "lefthook": "^2.0.13",
+    "turbo": "^2.6.3",
+    "typescript": "catalog:"
+  },
+  "packageManager": "bun@1.3.2"
+}

@@ -1,0 +1,3 @@
+{
+  "extends": "@aspire-demo/config/tsconfig.base.json"
+}
