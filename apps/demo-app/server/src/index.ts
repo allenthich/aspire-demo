@@ -70,4 +70,8 @@ app.get("/", (c) => {
   return c.text("OK");
 });
 
+app.get("/health", (c) => {
+  return c.text("OK");
+});
+
 export default app;
