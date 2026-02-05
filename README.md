@@ -55,8 +55,9 @@ The API is running at [http://localhost:3000](http://localhost:3000).
 ```
 aspire-demo/
 ├── apps/
-│   ├── web/         # Frontend application (SvelteKit)
-│   └── server/      # Backend API (Hono, ORPC)
+│   └── demo-app/
+│       ├── web/         # Frontend application (SvelteKit)
+│       └── server/      # Backend API (Hono, ORPC)
 ├── packages/
 │   ├── api/         # API layer / business logic
 │   └── db/          # Database schema & queries
