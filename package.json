@@ -3,7 +3,7 @@
   "private": true,
   "workspaces": {
     "packages": [
-      "apps/*",
+      "apps/**",
       "packages/*"
     ],
     "catalog": {
@@ -20,9 +20,10 @@
   },
   "type": "module",
   "scripts": {
-    "dev": "turbo dev",
+    "dev": "turbo dev --filter='./apps/*' --filter='./packages/*'",
     "build": "turbo build",
     "check-types": "turbo check-types",
+    "dev:demo": "turbo dev --filter='./apps/demo-app/*'",
     "dev:native": "turbo -F native dev",
     "dev:web": "turbo -F web dev",
     "dev:server": "turbo -F server dev",

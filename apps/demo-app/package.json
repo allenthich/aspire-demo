@@ -1,0 +1,8 @@
+{
+  "name": "demo-app",
+  "private": true,
+  "scripts": {
+    "dev": "turbo dev --filter='./server' --filter='./web'",
+    "build": "turbo build --filter='./server' --filter='./web'"
+  }
+}

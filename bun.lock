@@ -18,7 +18,7 @@
         "typescript": "catalog:",
       },
     },
-    "apps/server": {
+    "apps/demo-app/server": {
       "name": "server",
       "dependencies": {
         "@aspire-demo/api": "workspace:*",
@@ -38,7 +38,7 @@
         "typescript": "catalog:",
       },
     },
-    "apps/web": {
+    "apps/demo-app/web": {
       "name": "web",
       "version": "0.0.1",
       "dependencies": {
@@ -629,7 +629,7 @@
 
     "semver": ["semver@7.7.3", "", { "bin": { "semver": "bin/semver.js" } }, "sha512-SdsKMrI9TdgjdweUSR9MweHA4EJ8YxHn8DFaDisvhVlUOe4BF1tLD7GAj0lIqWVl+dPb/rExr0Btby5loQm20Q=="],
 
-    "server": ["server@workspace:apps/server"],
+    "server": ["server@workspace:apps/demo-app/server"],
 
     "set-cookie-parser": ["set-cookie-parser@3.0.1", "", {}, "sha512-n7Z7dXZhJbwuAHhNzkTti6Aw9QDDjZtm3JTpTGATIdNzdQz5GuFs22w90BcvF4INfnrL5xrX3oGsuqO5Dx3A1Q=="],
 
@@ -693,7 +693,7 @@
 
     "vitefu": ["vitefu@1.1.1", "", { "peerDependencies": { "vite": "^3.0.0 || ^4.0.0 || ^5.0.0 || ^6.0.0 || ^7.0.0-beta.0" }, "optionalPeers": ["vite"] }, "sha512-B/Fegf3i8zh0yFbpzZ21amWzHmuNlLlmJT6n7bu5e+pCHUKQIfXSYokrqOBGEMMe9UG2sostKQF9mml/vYaWJQ=="],
 
-    "web": ["web@workspace:apps/web"],
+    "web": ["web@workspace:apps/demo-app/web"],
 
     "wildcard-match": ["wildcard-match@5.1.4", "", {}, "sha512-wldeCaczs8XXq7hj+5d/F38JE2r7EXgb6WQDM84RVwxy81T/sxB5e9+uZLK9Q9oNz1mlvjut+QtvgaOQFPVq/g=="],
 
