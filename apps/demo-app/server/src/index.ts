@@ -1,3 +1,5 @@
+import "./telemetry";
+
 import { createContext } from "@aspire-demo/api/context";
 import { appRouter } from "@aspire-demo/api/routers/index";
 import { env } from "@aspire-demo/env/server";
@@ -9,6 +11,13 @@ import { ZodToJsonSchemaConverter } from "@orpc/zod/zod4";
 import { Hono } from "hono";
 import { cors } from "hono/cors";
 import { logger } from "hono/logger";
+import { trace, metrics } from "@opentelemetry/api";
+
+const tracer = trace.getTracer("weather-api-nodejs");
+const meter = metrics.getMeter("weather-api-nodejs");
+const apiRequestCounter = meter.createCounter("api.requests", {
+  description: "Total number of API requests",
+});
 
 const app = new Hono();
 
@@ -64,6 +73,32 @@ app.use("/*", async (c, next) => {
   }
 
   await next();
+});
+
+app.get("/api/weatherforecast", (c) => {
+  const span = tracer.startSpan("get-weather-forecast");
+
+  try {
+    const forecasts = [
+      { date: "2024-01-01", temperatureC: 25, temperatureF: 77, summary: "Sunny" },
+      { date: "2024-01-02", temperatureC: 20, temperatureF: 68, summary: "Cloudy" },
+      { date: "2024-01-03", temperatureC: 22, temperatureF: 72, summary: "Partly Cloudy" },
+      { date: "2024-01-04", temperatureC: 18, temperatureF: 64, summary: "Rainy" },
+      { date: "2024-01-05", temperatureC: 28, temperatureF: 82, summary: "Hot" },
+    ];
+
+    apiRequestCounter.add(1, { endpoint: "/api/weatherforecast" });
+
+    span.setAttributes({
+      "forecast.count": forecasts.length,
+      endpoint: "/api/weatherforecast",
+    });
+
+    console.log("Returning weather forecast data");
+    return c.json(forecasts);
+  } finally {
+    span.end();
+  }
 });
 
 app.get("/", (c) => {
