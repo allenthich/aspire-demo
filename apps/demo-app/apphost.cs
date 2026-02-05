@@ -9,10 +9,14 @@ var postgres = builder.AddPostgres("postgres");
 var postgresdb = postgres.AddDatabase("postgresdb");
 
 // Bun API server (Hono + oRPC)
+// Note: Bun has incomplete gRPC support, so we use HTTP/Protobuf for OTLP
 var server = builder.AddBunApp("server", "./server", "src/index.ts")
     .WithBunPackageInstallation()
     .WithHttpEndpoint(port: 8080, env: "PORT")
     .WithHttpHealthCheck("/health")
+    .WithOtlpExporter()
+    .WithEnvironment("OTEL_EXPORTER_OTLP_PROTOCOL", "http/protobuf")
+    .WithEnvironment("NODE_TLS_REJECT_UNAUTHORIZED", "0")
     .WaitFor(postgresdb)
     .WithReference(postgresdb);
 
